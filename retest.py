@@ -44,7 +44,9 @@ class ShowWindow(QWidget):
         self.setWindowTitle('浏览请求测试') 
         self.show()
 
-    def urllist(self):
+    
+#定义点击按钮就开始刷新        
+    def refreshText(self):
         text = self.editText.toPlainText #多行输入的文本赋值给text
         if text == '':
             QMessageBox.information(self, "空文本",
@@ -53,18 +55,15 @@ class ShowWindow(QWidget):
             to_oneline = ' '.join(text.split())  #多行的text转换成单行
             URL_LIST = to_oneline.split(' ') #单行数据转为列表数据
             url_num = len(URL_LIST)
-            print("网址有：",url_num,"个")
-    
-#定义点击按钮就开始刷新        
-    def refreshText(self):
-        urllist = urllist()
-        for i in range(2):
-            print('------',i,'------')
-            for j in range(url_num):
-                url = URL_LIST[j]
-                requests.get(url)
-                time.sleep(3)
-                print(j)
+            print("网址有：",url_num,"个")        
+        
+            for i in range(2):
+                print('------',i,'------')
+                for j in range(url_num):
+                    url = URL_LIST[j]
+                    requests.get(url)
+                    time.sleep(3)
+                    print(j)
                 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
